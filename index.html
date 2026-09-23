@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The schedule tax</title>
+<meta name="description" content="Twenty NBA regular seasons — 23,838 games, 2003-04 through 2022-23 — run through a fixed-effects model that prices what a team arrived with: rest, travel, time zones, how many game">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{
+  --surface:#fcfcfb; --raised:#f4f3ef; --ink:#0b0b0b; --ink-2:#43423f; --ink-3:#7d7b74;
+  --rule:#e3e2dc; --accent:#1c5cab; --mark:#eb6834;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --surface:#14140f; --raised:#1e1e18; --ink:#f2f1ec; --ink-2:#c9c7bf; --ink-3:#8d8b83;
+    --rule:#2e2e27; --accent:#7fb0f0; --mark:#f2895a;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--surface); color:var(--ink);
+  font:400 17px/1.62 "Source Sans 3","Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-feature-settings:"kern" 1;
+}
+.wrap{max-width:1020px;margin:0 auto;padding:0 22px}
+.bar{border-bottom:1px solid var(--rule);background:var(--surface)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline;padding-top:16px;padding-bottom:15px}
+.bar .slug{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12.5px;letter-spacing:.02em;color:var(--ink-2)
+}
+.bar nav{margin-left:auto;display:flex;gap:18px}
+.bar a{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12.5px;color:var(--ink-3);text-decoration:none;border-bottom:1px solid transparent
+}
+.bar a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+main{padding:0 0 96px}
+.col{max-width:700px}
+h1{
+  font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:700;font-size:clamp(30px,5.4vw,46px);line-height:1.08;
+  letter-spacing:-.022em;margin:54px 0 20px;max-width:640px
+}
+h2{
+  font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:600;font-size:22px;line-height:1.24;letter-spacing:-.012em;
+  margin:52px 0 14px;max-width:700px
+}
+h3{font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:600;
+  font-size:18.5px;letter-spacing:-.008em;margin:40px 0 8px}
+p.meta{font-size:14.5px;color:var(--ink-3);margin:-2px 0 16px}
+p.meta a{border-bottom-color:transparent}
+p.meta a:hover{border-bottom-color:currentColor}
+p{margin:0 0 18px;max-width:700px}
+p strong{font-weight:600}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(28,92,171,.32)}
+a:hover{border-bottom-color:currentColor}
+hr{border:0;border-top:1px solid var(--rule);margin:46px 0}
+ul,ol{margin:0 0 18px;padding-left:22px;max-width:700px}
+li{margin:0 0 8px}
+li>p{margin:0 0 8px}
+code{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.86em;background:var(--raised);padding:.12em .34em;border-radius:3px
+}
+pre{
+  background:var(--raised);border:1px solid var(--rule);border-radius:5px;
+  padding:15px 17px;overflow-x:auto;margin:0 0 22px;max-width:820px
+}
+pre code{background:none;padding:0;font-size:13px;line-height:1.55}
+em{color:var(--ink-2)}
+.tw{overflow-x:auto;margin:0 0 26px;max-width:980px}
+table{border-collapse:collapse;font-size:14.5px;min-width:100%}
+th,td{padding:7px 15px 7px 0;text-align:left;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:11.5px;text-transform:uppercase;letter-spacing:.055em;
+  color:var(--ink-3);font-weight:500;border-bottom-color:var(--ink-3);white-space:normal
+}
+td.num{text-align:right;font-variant-numeric:tabular-nums;padding-right:22px}
+th.num{text-align:right;padding-right:22px}
+tbody tr:last-child td{border-bottom:0}
+figure{margin:30px 0 34px;max-width:980px}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:4px}
+.foot{border-top:1px solid var(--rule);padding:22px 0 40px}
+.foot .wrap{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:11.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 20px
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  h1{margin-top:36px}
+  th,td{padding-right:14px}
+}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap"><span class="slug">nba-schedule-tax</span><nav><a href="docs/method.html">method</a><a href="https://github.com/jmsmarrelli/nba-schedule-tax">repository</a><a href="https://jmsmarrelli.github.io/basketball-analytics/">all projects</a></nav></div></header>
+<main><div class="wrap">
+<h1>The schedule tax</h1>
+<p>Twenty NBA regular seasons — 23,838 games, 2003-04 through 2022-23 — run through
+a fixed-effects model that prices what a team arrived with: rest, travel, time
+zones, how many games it had already played that week, and where the building is.</p>
+<p>The question this started from was whether the schedule complaints are real, and
+how much of a team's record you should discount for a hard calendar.</p>
+<p>The answer is: less than almost anyone thinks. And the thing that actually
+decides games has nothing to do with the calendar at all.</p>
+<hr>
+<h2>Two findings</h2>
+<p><strong>A season's worth of schedule luck is about a quarter of a win.</strong></p>
+<p>Across 599 team-seasons, the total effect of rest, density, travel and time
+zones — a team's own burden priced against what its opponents were carrying on
+the same nights — has a standard deviation of <strong>0.23 wins</strong>. The full range over
+twenty seasons runs from −0.74 (Cleveland, 2007-08) to +0.77 (Orlando, 2004-05).
+Within a single season, the gap between the most and least favored team averages
+<strong>0.90 wins</strong>.</p>
+<p>That is not zero, and in a play-in race it is not nothing. But it is an order of
+magnitude smaller than the way schedule strength gets talked about, and the
+reason is structural: everyone plays back-to-backs, everyone flies, and a team
+with a heavy week is usually playing someone who also has one. Most of the
+burden nets out before it reaches the standings.</p>
+<figure><img loading="lazy" alt="Schedule luck by team" src="figures/04_schedule_luck_season.png"></figure>
+<p><strong>Playing at altitude is worth ten times as much, every year, to the same two
+teams.</strong></p>
+<p>Denver and Utah collect <strong>+2.45 and +2.46 wins per season</strong> from their elevation
+alone — larger than the entire twenty-year range of calendar luck, and it arrives
+every single year rather than at random.</p>
+<figure><img loading="lazy" alt="Schedule luck against altitude" src="figures/05_schedule_luck_distribution.png"></figure>
+<hr>
+<h2>What each night is worth</h2>
+<p>All effects are on a team's own net rating, in points per 100 possessions,
+against a baseline of three or more days off. Team-season fixed effects mean each
+one is identified from variation inside a single roster's own season.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>Points per 100</th>
+<th>Std. error</th>
+<th>t</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No rest (back-to-back)</td>
+<td class="num"><strong>−1.52</strong></td>
+<td class="num">0.35</td>
+<td class="num">−4.4</td>
+</tr>
+<tr>
+<td>One day off</td>
+<td class="num">+0.22</td>
+<td class="num">0.32</td>
+<td class="num">0.7</td>
+</tr>
+<tr>
+<td>Two days off</td>
+<td class="num">+0.15</td>
+<td class="num">0.33</td>
+<td class="num">0.4</td>
+</tr>
+<tr>
+<td>Playing at altitude</td>
+<td class="num"><strong>−2.12</strong></td>
+<td class="num">0.49</td>
+<td class="num">−4.4</td>
+</tr>
+<tr>
+<td>Games in the past week, each</td>
+<td class="num"><strong>−0.38</strong></td>
+<td class="num">0.12</td>
+<td class="num">−3.1</td>
+</tr>
+<tr>
+<td>Time zones crossed, each</td>
+<td class="num"><strong>−0.32</strong></td>
+<td class="num">0.15</td>
+<td class="num">−2.2</td>
+</tr>
+<tr>
+<td>Travel, per 1,000 miles</td>
+<td class="num">+0.31</td>
+<td class="num">0.20</td>
+<td class="num">1.6</td>
+</tr>
+<tr>
+<td>Nth straight road game</td>
+<td class="num">+0.11</td>
+<td class="num">0.07</td>
+<td class="num">1.8</td>
+</tr>
+</tbody>
+</table></div>
+<figure><img loading="lazy" alt="Schedule effects" src="figures/02_schedule_effects.png"></figure>
+<p>Three things in that table are worth pulling out.</p>
+<p><strong>Rest is a cliff, not a slope.</strong> The entire effect is in the back-to-back. One
+day off is statistically indistinguishable from four. Whatever fatigue does to an
+NBA team, a single night of sleep clears most of it — which is an argument for
+planning rotations around the second night of a back-to-back specifically, and
+against treating "days of rest" as a continuous input to anything.</p>
+<p><strong>Miles do not matter. Time zones do.</strong> Raw distance carries the wrong sign and
+does not reach significance once rest and time zones are controlled. Each time
+zone crossed costs about a third of a point per 100. Chartered flights have made
+distance close to free; what remains is the body clock. A team's travel burden is
+better described by its longitude than its odometer.</p>
+<p><strong>Density is real and cumulative.</strong> Each additional game in the trailing seven
+days costs about 0.38 points per 100, on top of the back-to-back effect. Four
+games in six nights is worth roughly a point and a half of net rating before
+anyone gets on a plane.</p>
+<hr>
+<h2>The altitude term, and how much to trust it</h2>
+<p>A continuous per-foot altitude term is the obvious specification and it is the
+wrong one. Fitting a separate home bonus for each elevated venue — over and above
+that season's league-wide home advantage, with team quality already absorbed —
+gives this:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Venue</th>
+<th>Elevation</th>
+<th>Home games</th>
+<th>Bonus, points per 100</th>
+<th>Std. error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Denver</td>
+<td>5,280 ft</td>
+<td class="num">797</td>
+<td class="num"><strong>+2.14</strong></td>
+<td class="num">0.65</td>
+</tr>
+<tr>
+<td>Salt Lake City</td>
+<td>4,226 ft</td>
+<td class="num">794</td>
+<td class="num"><strong>+2.26</strong></td>
+<td class="num">0.65</td>
+</tr>
+<tr>
+<td>Oklahoma City</td>
+<td>1,201 ft</td>
+<td class="num">663</td>
+<td class="num">+0.41</td>
+<td class="num">0.70</td>
+</tr>
+<tr>
+<td>Phoenix</td>
+<td>1,086 ft</td>
+<td class="num">795</td>
+<td class="num">−0.35</td>
+<td class="num">0.65</td>
+</tr>
+<tr>
+<td>Atlanta</td>
+<td>1,050 ft</td>
+<td class="num">798</td>
+<td class="num">+0.28</td>
+<td class="num">0.65</td>
+</tr>
+</tbody>
+</table></div>
+<p>The effect is not proportional to elevation. Salt Lake City, a thousand feet
+lower, gets the same bonus as Denver, and nothing around a thousand feet shows
+anything at all. So altitude enters the model as a threshold — a team that lives
+near sea level playing in the mountains — rather than as a slope, and the model
+is honest about the shape of what it found instead of imposing a tidier one.</p>
+<p>Two caveats I would raise before anyone acts on this. First, the term is
+identified off two buildings, so "altitude" is not cleanly separable from
+"Denver and Salt Lake City". Everything else those two arenas have in common
+loads onto this coefficient. Second, the point estimates are about 2.1 and 2.3
+points per 100 with standard errors around 0.65, so the honest statement is
+"somewhere between one and three and a half points", not "2.12".</p>
+<p>What survives both caveats is the comparison that matters: whatever it is, it is
+much larger and much more reliable than anything the schedule maker does.</p>
+<hr>
+<h2>Home court is shrinking</h2>
+<p>The model estimates home advantage separately for each season, net of team
+quality and of how both teams arrived.</p>
+<figure><img loading="lazy" alt="Home advantage" src="figures/01_home_advantage.png"></figure>
+<p><strong>3.64 points per 100 in 2003-04, 2.64 in 2022-23</strong>, trending at −0.08 per
+season. The floor is 2020-21 at <strong>1.04</strong>, the season played in mostly empty
+buildings, which is about as close to a natural experiment on crowds as this
+sport provides — and it puts a number on the crowd's share of home court that is
+hard to get any other way.</p>
+<p>Note also what is <em>not</em> driving the decline: the schedule got easier over the
+same period, which would push the other way. Back-to-backs per team fell from
+about 20 to 13 and travel from 46,000 miles a season to 39,000.</p>
+<figure><img loading="lazy" alt="Schedule trend" src="figures/03_schedule_trend.png"></figure>
+<hr>
+<h2>How the model works</h2>
+<p>One row per game, from the home team's side. The outcome is home net rating —
+points per 100 possessions minus points allowed per 100, with possessions
+estimated from the box score.</p>
+<pre><code>net_home  =  strength(home team, that season)
+           − strength(away team, that season)
+           + home advantage for that season
+           + schedule terms, entered as home minus away
+           + error
+</code></pre>
+<p>R² is 0.229 with a residual standard deviation of 12.3 points per 100. That
+residual is the sport: a single NBA game is mostly noise, and any model of one
+that fits much better is fitting something it should not be.</p>
+<p><strong>Schedule terms are differenced rather than fit separately for each side.</strong> That
+imposes the restriction that a day of rest is worth the same to whoever has it.
+<code>run_02_model.py</code> fits the unrestricted version and reports the test: across all
+eight terms the home and away coefficients sum to zero within 1.8 standard
+errors, so the restriction holds and buys back eight degrees of freedom.</p>
+<p><strong>Team-season fixed effects, not team fixed effects.</strong> A franchise is a different
+team every October. Season-specific effects mean a schedule coefficient can only
+be identified by comparing a roster to itself.</p>
+<p><strong>The 2019-20 restart is excluded, not averaged in.</strong> Eighty-eight games played
+by twenty-two teams in one Florida complex, with no travel, no crowd and three
+months off, is not a data point about rest and travel.</p>
+<p><strong>Wins are converted at the rate this data implies</strong>, not a rule of thumb:
+regressing team-season win percentage on net rating gives 2.50 wins per point of
+net rating over 82 games, with r = 0.97.</p>
+<hr>
+<h2>What this does not do</h2>
+<ul>
+<li><strong>No injury or rest-decision data.</strong> If teams already sit players on the second
+  night of a back-to-back, then −1.52 is the effect <em>after</em> whatever mitigation
+  the league already applies. It is the residual damage, not the raw damage, and
+  the true untreated cost is larger.</li>
+<li><strong>Possessions are estimated</strong>, using FGA + 0.44×FTA − OREB + TOV. At the level
+  of a whole game the 0.44 is fine; it would not be at the level of a stint.</li>
+<li><strong>Travel is measured as flown</strong>, city center to city center, and ignores when a
+  team actually flew. A team that travels after a night game and one that flies
+  in the morning look identical here.</li>
+<li><strong>Regular season only.</strong> Playoff rest patterns are a different problem.</li>
+<li><strong>2022-23 is the last season</strong>, which is where the public play-by-play mirror
+  this project reads currently ends.</li>
+</ul>
+<hr>
+<h2>Running it</h2>
+<pre><code class="language-bash">pip install -r requirements.txt
+python src/run_01_build.py   # schedules + box scores -&gt; the team-game panel
+python src/run_02_model.py   # the fixed-effects fit, figures 01-03
+python src/run_03_luck.py    # season totals in wins, figures 04-05
+</code></pre>
+<p>Or <code>make all</code>. The whole pipeline takes about two minutes.</p>
+<pre><code>src/
+  config.py      paths, seasons, the altitude threshold
+  venues.py      every city the league played in, with elevation and time zone
+  model.py       the design matrix and the estimator
+  run_0*.py      the pipeline, in order
+output/          every number quoted above, as CSV
+figures/         five figures, regenerated from scratch by the pipeline
+docs/method.md   longer notes, including what I tried that did not work
+</code></pre>
+<h2>Data</h2>
+<p>Schedules and team box scores from
+<a href="https://github.com/sportsdataverse/hoopR-data">sportsdataverse/hoopR-data</a>,
+which mirrors ESPN's public feeds. <code>data/README.md</code> has the fetch step.</p>
+<h2>License</h2>
+<p>MIT. See <code>LICENSE</code>.</p>
+</div></main>
+<footer class="foot"><div class="wrap"><span>nba-schedule-tax</span><span>figures and tables regenerated by the pipeline in this repository</span></div></footer>
+</body>
+</html>

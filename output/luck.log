@@ -1,0 +1,40 @@
+wins per point of net rating, over 82 games: 2.50  (r = 0.967)
+
+spread in schedule-driven wins within a season: 0.90 wins on average between the most and least favoured team
+standard deviation across all team-seasons: 0.23 wins
+
+--- 2022-23, hardest and easiest ---
+team  games  b2b    miles  net_schedule  wins_effect
+  GS     79   15 45492.13         -0.17        -0.41
+  NY     79   12 36586.93         -0.13        -0.32
+ LAC     79   14 42556.39         -0.13        -0.31
+ CHI     78   14 45290.55         -0.12        -0.27
+ CHA     79   12 34778.48         -0.09        -0.22
+ MIN     79   13 42480.50          0.07         0.17
+ PHX     78   11 44021.58          0.10         0.23
+ LAL     78   11 40343.20          0.14         0.33
+ ATL     78   12 35613.61          0.14         0.33
+ TOR     78   11 32640.50          0.17         0.39
+
+heaviest calendars since 2004
+ season team  b2b    miles  wins_effect
+   2008  CLE   21 37694.61        -0.74
+   2015  CLE   20 35092.00        -0.62
+   2012  MIA   20 42125.76        -0.59
+   2014  SAC   19 44324.87        -0.57
+   2012  CLE   22 28553.32        -0.54
+
+lightest
+ season team  b2b    miles  wins_effect
+   2005  ORL   21 44240.18         0.77
+   2015  MIA   17 53732.02         0.65
+   2014  CHI   17 40237.82         0.62
+   2006   NO   19 49846.86         0.57
+   2016  BKN   15 38840.58         0.57
+
+altitude, priced separately (mean wins per season)
+team
+UTAH    2.46
+DEN     2.45
+CHI    -0.12
+IND    -0.12
