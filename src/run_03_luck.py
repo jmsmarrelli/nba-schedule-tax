@@ -91,7 +91,7 @@ def main() -> None:
 
     print(f"\nspread in schedule-driven wins within a season: "
           f"{luck.groupby('season')['wins_effect'].agg(lambda s: s.max() - s.min()).mean():.2f} "
-          "wins on average between the most and least favored team")
+          "wins on average between the most and least favoured team")
     print(f"standard deviation across all team-seasons: {luck['wins_effect'].std():.2f} wins")
     print(f"\n--- {LAST_SEASON - 1}-{str(LAST_SEASON)[2:]}, hardest and easiest ---")
     d = luck[luck["season"] == LAST_SEASON]
