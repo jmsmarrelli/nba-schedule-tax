@@ -1,5 +1,8 @@
 # Method notes
 
+The coefficients and win equivalents below are model-based associations through 2022–23. Team-season controls do not eliminate all confounding. In particular, a high-altitude indicator cannot isolate elevation from every other persistent venue difference; the altitude win figures are model allocations, not wins causally attributable to elevation alone.
+
+
 What the README leaves out: the specification choices, the things that did not
 work, and where I think this is thin.
 
@@ -92,7 +95,7 @@ plus-minus takes the log.
 
 **Rest is measured, load is not.** Days between games is a proxy for how tired a
 team is. Minutes played, overtime, blowouts that emptied the bench, and who
-actually traveled are all invisible here. A team coming off a 25-point win with
+actually travelled are all invisible here. A team coming off a 25-point win with
 its starters resting the fourth quarter is not the same as one coming off double
 overtime, and this model calls them identical.
 

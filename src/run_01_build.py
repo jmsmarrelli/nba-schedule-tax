@@ -36,8 +36,7 @@ def load_raw() -> tuple[pd.DataFrame, pd.DataFrame]:
     for s in SEASONS:
         sp, bp = RAW / f"nba_schedule_{s}.csv", RAW / f"team_box_{s}.csv.gz"
         if not (sp.exists() and bp.exists()):
-            print(f"  missing raw files for {s}, skipping", file=sys.stderr)
-            continue
+            raise FileNotFoundError(f"Missing required raw inputs for {s}")
         sched.append(pd.read_csv(sp, low_memory=False, usecols=SCHED_COLS))
         box.append(pd.read_csv(bp, low_memory=False, usecols=BOX_COLS,
                                compression="gzip"))
